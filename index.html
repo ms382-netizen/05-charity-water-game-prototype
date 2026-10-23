@@ -1,13 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Drop | charity: water</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to the Charity Water Game Prototype</h1>
-    <script src="script.js"></script>
+  <!-- Header with charity: water branding -->
+  <header class="site-header">
+    <div class="brand">
+      <!-- Put the official logo file at img/cw_logo.png; if it's missing, the text wordmark shows instead -->
+      <img src="img/cw_logo.png" alt="charity: water logo" class="logo"
+           onerror="this.remove(); document.getElementById('wordmark').hidden = false;">
+      <span id="wordmark" class="wordmark" hidden>charity: water</span>
+    </div>
+    <a class="donate-link" href="https://www.charitywater.org/donate" target="_blank" rel="noopener">Donate</a>
+  </header>
+
+  <main class="game-wrapper">
+    <h1>Water Drop</h1>
+    <p class="tagline">Catch the clean drops, dodge the dirty ones, and fill the jerry can before time runs out.</p>
+
+    <!-- Score / timer / goal -->
+    <div class="stats">
+      <div class="stat"><span class="stat-label">Score</span><span id="score">0</span></div>
+      <div class="stat" id="time-stat"><span class="stat-label">Time</span><span id="time">30</span></div>
+      <div class="stat"><span class="stat-label">Goal</span><span id="goal">20</span></div>
+    </div>
+
+    <!-- Jerry can fill bar -->
+    <div class="progress-row">
+      <span class="progress-label">Jerry can</span>
+      <div class="progress" role="progressbar" aria-label="Jerry can fill level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Play area: drops are added here by script.js -->
+    <div id="game-container" class="game-container">
+      <div id="overlay" class="overlay">
+        <h2 id="overlay-title">Ready to bring clean water?</h2>
+        <p id="overlay-text">Tap clean drops before they hit the ground. Reach 20 points in 30 seconds to win!</p>
+        <div class="legend">
+          <div class="legend-item"><span class="mini-drop clean"></span> Clean drop: <strong>+1</strong></div>
+          <div class="legend-item"><span class="mini-drop dirty"></span> Dirty drop: <strong>−2</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <p id="message" class="message" aria-live="polite">Press Start to begin!</p>
+
+    <div class="controls">
+      <button id="start-btn" class="btn btn-primary">Start</button>
+      <button id="reset-btn" class="btn btn-secondary">Reset</button>
+    </div>
+  </main>
+
+  <!-- Confetti layer for the win celebration -->
+  <canvas id="confetti"></canvas>
+
+  <footer>
+    Every drop counts. <a href="https://www.charitywater.org" target="_blank" rel="noopener">Learn how charity: water brings clean water to communities around the world.</a>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
